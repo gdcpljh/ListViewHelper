@@ -15,9 +15,11 @@ limitations under the License.
  */
 package com.shizhefei.view.listviewhelper;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
@@ -26,7 +28,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
-
 import com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
@@ -135,6 +136,7 @@ public class ListViewHelper<DATA> {
 	/**
 	 * 刷新，开启异步线程，并且显示加载中的界面，当数据加载完成自动还原成加载完成的布局，并且刷新列表数据
 	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public void refresh() {
 		if (dataAdapter == null || dataSource == null) {
 			if (pullToRefreshPinnedHeaderListView != null) {
@@ -201,12 +203,17 @@ public class ListViewHelper<DATA> {
 			};
 
 		};
-		asyncTask.execute();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		} else {
+			asyncTask.execute();
+		}
 	}
 
 	/**
 	 * 加载更多，开启异步线程，并且显示加载中的界面，当数据加载完成自动还原成加载完成的布局，并且刷新列表数据
 	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	public void loadMore() {
 		if (isLoading()) {
 			return;
@@ -267,7 +274,11 @@ public class ListViewHelper<DATA> {
 				}
 			};
 		};
-		asyncTask.execute();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		} else {
+			asyncTask.execute();
+		}
 	}
 
 	/**
@@ -354,14 +365,14 @@ public class ListViewHelper<DATA> {
 	}
 
 	private OnClickListener onClickLoadMoreListener = new OnClickListener() {
-	
+
 		@Override
 		public void onClick(View v) {
 			loadMore();
 		}
 	};
 	private OnClickListener onClickRefresListener = new OnClickListener() {
-	
+
 		@Override
 		public void onClick(View v) {
 			refresh();
@@ -371,17 +382,17 @@ public class ListViewHelper<DATA> {
 	 * 滚动到底部自动加载更多数据
 	 */
 	private OnScrollListener onScrollListener = new OnScrollListener() {
-	
+
 		@Override
 		public void onScrollStateChanged(AbsListView listView, int scrollState) {
 			if (autoLoadMore) {
 				if (hasMoreData) {
 					if (!pullToRefreshPinnedHeaderListView.isRefreshing()) {// 如果不是刷新状态
-	
+
 						if (scrollState == OnScrollListener.SCROLL_STATE_IDLE && listView.getLastVisiblePosition() + 1 == listView.getCount()) {// 如果滚动到最后一行
-	
+
 							// 如果网络可以用
-	
+
 							if (NetworkUtils.hasNetwork(context)) {
 								loadMore();
 							} else {
@@ -394,7 +405,7 @@ public class ListViewHelper<DATA> {
 				}
 			}
 		}
-	
+
 		@Override
 		public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 		}
@@ -403,7 +414,7 @@ public class ListViewHelper<DATA> {
 	 * 针对于电视 选择到了底部项的时候自动加载更多数据
 	 */
 	private OnItemSelectedListener onItemSelectedListener = new OnItemSelectedListener() {
-	
+
 		@Override
 		public void onItemSelected(AdapterView<?> listView, View view, int position, long id) {
 			if (autoLoadMore) {
@@ -417,10 +428,10 @@ public class ListViewHelper<DATA> {
 				}
 			}
 		}
-	
+
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
-	
+
 		}
 	};
 
