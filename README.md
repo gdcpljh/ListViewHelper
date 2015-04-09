@@ -18,6 +18,8 @@ ListViewHelper. 实现下拉刷新，滚动底部自动加载更多，分页加�
    // 释放资源
 		listViewHelper.destory();
 		
+Android-PullToRefresh-Library 是用了https://github.com/chrisbanes/Android-PullToRefresh 这个框架
+这个项目的目的是对ListView进行MVC的架构，使用者可以根据需求也可以把Android-PullToRefresh-Library换成其他下拉刷新类库。
 License
 =======
 
