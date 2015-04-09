@@ -24,7 +24,7 @@ import android.widget.ListView;
  * @author LuckyJayce
  *
  */
-public interface ILoadViewFractory {
+public interface ILoadViewFactory {
 
 	public ILoadMoreView madeLoadMoreView();
 

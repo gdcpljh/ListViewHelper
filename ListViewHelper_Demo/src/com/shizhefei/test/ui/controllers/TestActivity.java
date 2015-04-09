@@ -37,7 +37,7 @@ public class TestActivity extends Activity {
 		setContentView(R.layout.activity_test);
 
 		// 设置LoadView的factory，用于创建使用者自定义的加载失败，加载中，加载更多等布局,写法参照DeFaultLoadViewFactory
-		// ListViewHelper.setLoadViewFractory(new LoadViewFractory());
+		// ListViewHelper.setLoadViewFactory(new LoadViewFactory());
 
 		PullToRefreshListView refreshListView = (PullToRefreshListView) findViewById(R.id.pullToRefreshListView);
 		listViewHelper = new ListViewHelper<List<Book>>(refreshListView);

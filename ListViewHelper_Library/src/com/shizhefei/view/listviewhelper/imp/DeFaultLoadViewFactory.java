@@ -24,11 +24,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.shizhefei.view.listviewhelper.ILoadViewFractory;
+import com.shizhefei.view.listviewhelper.ILoadViewFactory;
 import com.shizhefei.view.listviewhelper.R;
 import com.shizhefei.view.vary.VaryViewHelper;
 
-public class DeFaultLoadViewFactory implements ILoadViewFractory {
+public class DeFaultLoadViewFactory implements ILoadViewFactory {
 
 	@Override
 	public ILoadMoreView madeLoadMoreView() {

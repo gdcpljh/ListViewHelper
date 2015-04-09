@@ -32,8 +32,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.shizhefei.utils.NetworkUtils;
-import com.shizhefei.view.listviewhelper.ILoadViewFractory.ILoadMoreView;
-import com.shizhefei.view.listviewhelper.ILoadViewFractory.ILoadView;
+import com.shizhefei.view.listviewhelper.ILoadViewFactory.ILoadMoreView;
+import com.shizhefei.view.listviewhelper.ILoadViewFactory.ILoadView;
 import com.shizhefei.view.listviewhelper.imp.DeFaultLoadViewFactory;
 
 /**
@@ -65,10 +65,10 @@ public class ListViewHelper<DATA> {
 	private boolean hasMoreData = true;
 	private ILoadView mLoadView;
 	private ILoadMoreView mLoadMoreView;
-	public static ILoadViewFractory loadViewFractory = new DeFaultLoadViewFactory();
+	public static ILoadViewFactory loadViewFactory = new DeFaultLoadViewFactory();
 
 	public ListViewHelper(PullToRefreshAdapterViewBase<? extends ListView> pullToRefreshAdapterViewBase) {
-		this(pullToRefreshAdapterViewBase, loadViewFractory.madeLoadView(), loadViewFractory.madeLoadMoreView());
+		this(pullToRefreshAdapterViewBase, loadViewFactory.madeLoadView(), loadViewFactory.madeLoadMoreView());
 	}
 
 	public ListViewHelper(PullToRefreshAdapterViewBase<? extends ListView> pullToRefreshAdapterViewBase, ILoadView loadView,
@@ -96,8 +96,8 @@ public class ListViewHelper<DATA> {
 	 * 
 	 * @param fractory
 	 */
-	public static void setLoadViewFractory(ILoadViewFractory fractory) {
-		loadViewFractory = fractory;
+	public static void setLoadViewFractory(ILoadViewFactory fractory) {
+		loadViewFactory = fractory;
 	}
 
 	/**
