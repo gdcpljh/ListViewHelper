@@ -1,6 +1,6 @@
 # ListViewHelper
 ListViewHelper. 实现下拉刷新，滚动底部自动加载更多，分页加载，自动切换显示网络失败布局，暂无数据布局，,真正的MVC架构.
-## 1.Model (IDataSource<DATA>)
+## 1.Model (IDataSource<DATA>) 负责获取数据
         //数据源
 	public interface IDataSource<DATA> {
 		// 获取刷新的数据
@@ -43,7 +43,7 @@ ListViewHelper. 实现下拉刷新，滚动底部自动加载更多，分页加�
 		}
 
 	}
-## 2.View（IDataAdapter<DATA>）
+## 2.View（IDataAdapter<DATA>）负责显示数据
 	public interface IDataAdapter<DATA> extends ListAdapter {
 
 		public abstract void setData(DATA data, boolean isRefresh);
@@ -105,7 +105,7 @@ ListViewHelper. 实现下拉刷新，滚动底部自动加载更多，分页加�
 	
 	
 	}
-## 3.Controller (Activity,Fragment,ListViewHelper)
+## 3.Controller (Activity,Fragment,ListViewHelper) 负责调度显示和调度获取数据
 Activity负责调度，代码如下
 	
 	public class MainActivity extends Activity {
