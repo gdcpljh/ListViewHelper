@@ -65,21 +65,6 @@ ListViewHelper. 实现下拉刷新，滚动底部自动加载更多，分页加�
 		}
 	
 		@Override
-		public int getCount() {
-			return books.size();
-		}
-	
-		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-	
-		@Override
-		public long getItemId(int position) {
-			return 0;
-		}
-	
-		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
 				convertView = inflater.inflate(R.layout.item_book, parent, false);
@@ -96,11 +81,28 @@ ListViewHelper. 实现下拉刷新，滚动底部自动加载更多，分页加�
 			}
 			books.addAll(data);
 		}
+
+		@Override
+		public int getCount() {
+			return books.size();
+		}
 	
 		@Override
 		public List<Book> getData() {
 			return books;
 		}
+
+
+		@Override
+		public Object getItem(int position) {
+			return null;
+		}
+	
+		@Override
+		public long getItemId(int position) {
+			return 0;
+		}
+	
 	
 	}
 ## 3.Controller (Activity,Fragment,ListViewHelper)
