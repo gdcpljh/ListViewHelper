@@ -70,6 +70,7 @@ public class DeFaultLoadViewFactory implements ILoadViewFactory {
 		@Override
 		public void showNomore() {
 			footView.setText("已经加载完毕");
+			footView.setOnClickListener(null);
 		}
 
 	}
